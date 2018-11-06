@@ -54,7 +54,45 @@
     <color name="Theme5_1_0">#756F68</color>
     <color name="Theme5_2">#590420</color>
 
-    <array name="theme_1">
+    <string-array name="chat_name_color">
+        <item>#04584A</item>
+        <item>#F39C04</item>
+        <item>#D76A05</item>
+        <item>#F40502</item>
+        <item>#720003</item>
+
+        <item>#393E46</item>
+        <item>#00ADB5</item>
+        <item>#FFF4E0</item>
+        <item>#F8B500</item>
+        <item>#FC3C3C</item>
+
+        <item>#EB6896</item>
+        <item>#C36894</item>
+        <item>#836890</item>
+        <item>#46698D</item>
+        <item>#0F6A8B</item>
+
+        <item>#397784</item>
+        <item>#9ADD4D</item>
+        <item>#F2C643</item>
+        <item>#3F2446</item>
+        <item>#1C1C1B</item>
+
+        <item>#D97EA8</item>
+        <item>#D92B8B</item>
+        <item>#158FBF</item>
+        <item>#F2E4DF</item>
+        <item>#D95F5F</item>
+
+        <item>#C0B7AE</item>
+        <item>#14403B</item>
+        <item>#406F67</item>
+        <item>#92958A</item>
+        <item>#757B71</item>
+    </string-array>
+
+    <!--<array name="theme_1">
         <item>@color/Theme1_0</item>
         <item>@color/Theme1_1</item>
         <item>@color/Theme1_2</item>
@@ -78,6 +116,6 @@
         <item>@color/Theme5_0</item>
         <item>@color/Theme5_1</item>
         <item>@color/Theme5_2</item>
-    </array>
+    </array>-->
 
 </resources>
