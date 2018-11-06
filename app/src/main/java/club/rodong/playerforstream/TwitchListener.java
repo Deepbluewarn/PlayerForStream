@@ -454,7 +454,7 @@ public class TwitchListener extends ListenerAdapter {
         return ret;
     }
     private String getRandomColor(String user_id){
-        String[] color_arr = context.getResources().getStringArray(R.array.chat_color);
+        String[] color_arr = context.getResources().getStringArray(R.array.chat_name_color);
         String return_color = MessageColor.get(user_id);
         if(return_color != null){
             return return_color;
