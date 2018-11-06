@@ -225,8 +225,6 @@ public class Stream_Player_Activity extends AppCompatActivity {
             Uri uri = getIntent().getData();
             channel = uri.getQueryParameter("channel");
             ID = Integer.valueOf(uri.getQueryParameter("id"));
-            //channel = "bluewarn";
-            //ID = 147773734;
         }
 
         OverlayToDelayInvisible();
@@ -842,10 +840,8 @@ public class Stream_Player_Activity extends AppCompatActivity {
     private void connectIRC() {
         String name = SPH.getTusername();
         String token = SPH.get_access_token();
-        Log.i("connectIRC", "connectIRC: name" + name + " , token" + token);
         if(name != null && token != null && !name.equals("") && !token.equals("") && channel != null){
             String chl = "#" + channel;
-            //String chl = "#bluewarn";
             BackgroundListenerManager backgroundListenerManager = new BackgroundListenerManager();
             backgroundListenerManager.addListener(myListener, true);
             Configuration ReceiverBot_conf = new Configuration.Builder()
@@ -907,7 +903,6 @@ public class Stream_Player_Activity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        //SetTheme(SPH.getTheme());
         boolean isconnected = false;
         for(PircBotX botX : manager.getBots().asList()){
             if(botX.isConnected()){
@@ -937,15 +932,6 @@ public class Stream_Player_Activity extends AppCompatActivity {
     @Override
     public void onPause(){
         super.onPause();
-
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                for(PircBotX botX : manager.getBots().asList()){
-                    botX.close();
-                }
-            }
-        });
     }
 
     private void init_WebServer() {
@@ -954,10 +940,8 @@ public class Stream_Player_Activity extends AppCompatActivity {
         try {
             server.start();
         } catch (IOException ioe) {
-            Log.w("Httpd", ioe.getLocalizedMessage());
-            //Toast.makeText(this, getString(R.string.WebServer_err), Toast.LENGTH_SHORT).show();
+            ioe.printStackTrace();
         }
-        Log.w("Httpd", "Web server initialized.");
     }
 
     @Override
@@ -972,6 +956,9 @@ public class Stream_Player_Activity extends AppCompatActivity {
         handler.post(new Runnable() {
             @Override
             public void run() {
+                for(PircBotX botX : manager.getBots().asList()){
+                    botX.close();
+                }
                 try {
                     FirebaseInstanceId.getInstance().deleteInstanceId();
                 } catch (IOException e) {
