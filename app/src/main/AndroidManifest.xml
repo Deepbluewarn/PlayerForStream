@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="club.rodong.playerforstream">
+    <!--인터넷 권한 추가-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--네트워크 상태 체크 권한 추가-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.Stream_Player_Activity"
+            android:configChanges="keyboardHidden|orientation"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                    android:scheme="simpletwitch"
+                    android:host="stream_player"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.SettingActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".activity.WebViewActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="abf9c4b722382e11f8b595e47a7e2099313a9ae1" />
+        <service
+            android:name=".service.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+    </application>
+
+
+</manifest>

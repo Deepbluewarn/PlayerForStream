@@ -1,0 +1,120 @@
+<resources>
+    <string name="app_name">Simple Player For Twitch</string>
+
+    <string name="TWITCH">TWITCH</string>
+
+    <string name="Twitch_disp">트위치</string>
+    <string name="Setting_disp">설정</string>
+
+    <!--트위치 API v5-->
+    <string name="twitch_BaseUrl">https://api.twitch.tv/</string>
+    <!--트위치 구독 Badges-->
+    <string name="twitch_subscriber_badges">https://badges.twitch.tv</string>
+    <string name="twitch_client_id">5s8icgxpodxmo6oajt6nk20x2q6yrc</string>
+    <!--트위치 IRC-->
+    <string name="twitch_irc">irc.chat.twitch.tv</string>
+    <string name="twitch_oauth">oauth:n041g5b5y2fuh6b42ktoa8jbawtc43</string>
+
+
+
+    <!--Activity Title-->
+    <string name="SettingActivityTitle">설정</string>
+
+    <!--설정_summery-->
+    <string name="pref_Login_yes">성공적으로 로그인하였습니다.</string>
+    <string name="pref_Login_no">로그인이 되어있지 않습니다.</string>
+    <string name="pref_Login_default">플랫폼에 로그인 합니다.</string>
+    <string name="pref_pd_list">현재 등록되어 있는 방송을 보여줍니다.</string>
+    <string name="pref_db_reset">등록된 방송 목록을 초기화합니다.</string>
+    <string name="pref_Twitch_load_favorite">트위치 팔로워 목록을 가져와 추가합니다.</string>
+    <string name="pref_Theme_setting">테마를 변경합니다.</string>
+    <string name="pref_Thumb_size">트위치 방송 미리보기 이미지의 해상도를 설정합니다.</string>
+    <!--설정_title-->
+    <string name="pref_setting_setting">설정</string>
+    <string name="pref_setting_tlogin">트위치 로그인</string>
+    <string name="pref_setting_setlang">언어 설정</string>
+    <string name="pref_setting_settheme">테마 설정</string>
+    <string name="pref_opensource_disc">오픈소스 라이센스</string>
+    <string name="pref_icon_info">아이콘 정보</string>
+
+
+    <string name="pref_st_list_title">트위치 추가된 방송</string>
+    <string name="pref_setting_db_reset">데이터베이스 초기화</string>
+    <string name="pref_Login_title">로그인</string>
+    <string name="pref_Logout_title">로그아웃</string>
+    <string name="pref_load_favorite_title">즐겨찾기 추가</string>
+    <string name="pref_Language_setting_title">언어 설정</string>
+    <string name="pref_Theme_setting_title">테마 설정</string>
+    <string name="pref_Thumb_size_title">미리보기 해상도 설정</string>
+
+
+    <!--설정_title-->
+
+
+    <!--Dialog Component-->
+    <string name="Yes">예</string>
+    <string name="No">아니오</string>
+    <!--검색 Dialog 메뉴-->
+    <string name="Search_title">검색 플랫폼 선택</string>
+    <string name="Kakao_search">카카오 PD 검색</string>
+    <string name="Twitch_search">트위치 채널 검색</string>
+    <!--삭제 Dialog 메뉴-->
+    <string name="Twitch_Reset">트위치 스트리머 리스트 초기화</string>
+
+    <!--Dialog-->
+    <string name="Logout">로그아웃 하시겠습니까?</string>
+    <string name="change_size">해상도 변경</string>
+
+    <!--Toast Message-->
+    <string name="E_404">방송을 찾을 수 없습니다.</string>
+    <string name="TooManyReq">요청이 너무 많습니다. 잠시 후 다시 시도하세요 (429)</string>
+    <!--Back Button -->
+    <string name="BackbuttonMsg">한번 더 누르면 종료됩니다.</string>
+
+    <!--EditText-->
+    <string name="Hint">검색</string>
+    <string name="Chat_Hint">메시지 보내기</string>
+
+    <string name="first_start">first_start</string>
+    <string name="t_islogin">TLogin?</string>
+    <string name="t_username">Tusername</string>
+    <string name="t_id">Tid</string>
+    <string name="access_token">access_token</string>
+    <string name="t_size_num">t_size_num</string><!--해상도 메뉴 번호. AlertDialog 번호 저장-->
+    <string name="t_width">t_width</string>
+    <string name="t_height">t_height</string>
+    <string name="t_livecount">t_livecount</string>
+    <string name="t_current_channel">t_current_channel</string>
+    <string name="t_last_join_channel">t_last_join_channel</string>
+    <string name="t_stream_qualities">t_stream_qualities</string>
+    <string name="theme_num">theme_num</string>
+
+    <!--IRC Messages-->
+    <string name="Connected">채팅방에 연결됨.</string>
+    <string name="CLEARCHAT">매니저가 채팅을 삭제했습니다.</string>
+    <string name="Slow_Mode_1">방이 슬로우 모드로 변경되었습니다. 메시지를 보낸 후</string>
+    <string name="Slow_Mode_2">초가 지나야 다음 메시지를 보낼 수 있습니다.</string>
+    <string name="Slow_Deactive">슬로우 모드가 해제되었습니다.</string>
+    <string name="Followers_Only_1">이 방은 현재</string>
+    <string name="Followers_Only_2">동안 팔로워 전용 모드입니다.</string>
+    <string name="Chat_Deleted">&lt;메시지가 삭제되었습니다&gt;</string>
+
+    <!--채팅창 RecyclerView ViewType-->
+    <string name="Main_Chat">MAIN_CHAT</string>
+    <string name="Alert_Chat">ALERT_CHAT</string>
+    <string name="Bit_Chat">BIT_CHAT</string>
+    <string name="SubScribe_Chat">SUBSCRIBE_CHAT</string>
+    <!--IRC Message Type-->
+    <string name="COMMAND_PRIVMSG">COMMAND_PRIVMSG</string>
+    <string name="COMMAND_ACTION">COMMAND_ACTION</string>
+    <string name="COMMAND_ROOMSTATE">COMMAND_ROOMSTATE</string>
+    <string name="COMMAND_CLEARCHAT">COMMAND_CLEARCHAT</string>
+    <string name="COMMAND_HOSTTARGET">COMMAND_HOSTTARGET</string>
+    <string name="COMMAND_RECONNECT">COMMAND_RECONNECT</string>
+    <string name="COMMAND_USERNOTICE">COMMAND_USERNOTICE</string>
+    <string name="COMMAND_USERSTATE">COMMAND_USERSTATE</string>
+    <string name="COMMAND_NOTICE">COMMAND_NOTICE</string>
+
+
+</resources>
+

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="황색">#F9D537</color>
+    <color name="설백색">#DDE7E7</color>
+    <color name="백색">#FFFFFF</color>
+    <color name="흑백">#1D1E23</color>
+    <color name="자황색">#F7B938</color>
+    <color name="다음팟">#2ea4ff</color>
+    <color name="벽색">#00B5E3</color>
+    <color name="청색">#0B6DB7</color>
+    <color name="회색">#A4AAA7</color>
+    <color name="Kakao_DEEPBLACK">#1f2026</color>
+    <color name="Kakao_BLACK">#2e2f37</color>
+    <color name="Kakao_YELLOW">#f5dc00</color>
+    <color name="PotPlayer_WHITE">#c4c6d2</color>
+    <color name="chat_white">#dad8de</color>
+
+    <color name="Twitch_1">#d7cceb</color>
+    <color name="Twitch_2">#6e6779</color>
+    <color name="Twitch_3">#4b367c</color>
+    <color name="Twitch_4">#201c2b</color>
+    <color name="Twitch_5">#17141f</color>
+    <color name="Twitch_6">#0e0c13</color>
+
+
+    <!--아래 정의된 컬러 중 text color 는 채팅 색상과 다르다. 채팅 색상은 검은색, 휜색 둘 뿐이다.-->
+    <color name="Theme1_0">#046975</color><!--background-->
+    <color name="Theme1_0_0">#004675</color><!--background_2-->
+    <color name="Theme1_1">#ffdf59</color><!--text-->
+    <color name="Theme1_1_1">#FFE9A8</color>
+    <color name="Theme1_2">#ff1d47</color><!--point-->
+
+    <color name="Theme2_0">#383D32</color>
+    <color name="Theme2_1">#FFB5B3</color>
+    <color name="Theme2_2">#1B1414</color>
+
+    <color name="Theme3_0">#A4EDE6</color>
+    <color name="Theme3_1">#009FCC</color>
+    <color name="Theme3_2">#02CCBA</color>
+
+    <color name="Theme4_0">#00090D</color>
+    <color name="Theme4_0_1">#0A0C0D</color>
+    <color name="Theme4_1">#756860</color>
+    <color name="Theme4_1_0">#756D67</color>
+    <color name="Theme4_2">#590420</color>
+
+    <color name="Theme5_0">#fcf6f8</color>
+    <color name="Theme5_0_1">#FCE6B7</color>
+    <color name="Theme5_1">#756860</color>
+    <color name="Theme5_1_0">#756F68</color>
+    <color name="Theme5_2">#590420</color>
+
+    <array name="theme_1">
+        <item>@color/Theme1_0</item>
+        <item>@color/Theme1_1</item>
+        <item>@color/Theme1_2</item>
+    </array>
+    <array name="theme_2">
+        <item>@color/Theme2_0</item>
+        <item>@color/Theme2_1</item>
+        <item>@color/Theme2_2</item>
+    </array>
+    <array name="theme_3">
+        <item>@color/Theme3_0</item>
+        <item>@color/Theme3_1</item>
+        <item>@color/Theme3_2</item>
+    </array>
+    <array name="theme_4">
+        <item>@color/Theme4_0</item>
+        <item>@color/Theme4_1</item>
+        <item>@color/Theme4_2</item>
+    </array>
+    <array name="theme_5">
+        <item>@color/Theme5_0</item>
+        <item>@color/Theme5_1</item>
+        <item>@color/Theme5_2</item>
+    </array>
+
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="트위치">
+        <PreferenceScreen
+            android:key="Twitch_login"
+            android:summary="@string/pref_Login_default"
+            android:title="@string/pref_Login_title">
+        </PreferenceScreen>
+        <PreferenceScreen
+            android:key="Twitch_thumb_size"
+            android:summary="@string/pref_Thumb_size"
+            android:title="@string/pref_Thumb_size_title">
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="테마 설정">
+        <PreferenceScreen
+            android:key="Theme_setting"
+            android:summary="@string/pref_Theme_setting"
+            android:title="@string/pref_Theme_setting_title">
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="아이콘 사용 정보">
+        <PreferenceScreen
+            android:key="icon_info"
+            android:title="@string/pref_icon_info">
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="라이센스">
+        <PreferenceScreen
+            android:key="OpenSources"
+            android:title="@string/pref_opensource_disc">
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+</PreferenceScreen>
