@@ -13,9 +13,6 @@
     <string name="twitch_client_id">5s8icgxpodxmo6oajt6nk20x2q6yrc</string>
     <!--트위치 IRC-->
     <string name="twitch_irc">irc.chat.twitch.tv</string>
-    <string name="twitch_oauth">oauth:n041g5b5y2fuh6b42ktoa8jbawtc43</string>
-
-
 
     <!--Activity Title-->
     <string name="SettingActivityTitle">설정</string>
@@ -46,20 +43,6 @@
     <string name="pref_Language_setting_title">언어 설정</string>
     <string name="pref_Theme_setting_title">테마 설정</string>
     <string name="pref_Thumb_size_title">미리보기 해상도 설정</string>
-
-
-    <!--설정_title-->
-
-
-    <!--Dialog Component-->
-    <string name="Yes">예</string>
-    <string name="No">아니오</string>
-    <!--검색 Dialog 메뉴-->
-    <string name="Search_title">검색 플랫폼 선택</string>
-    <string name="Kakao_search">카카오 PD 검색</string>
-    <string name="Twitch_search">트위치 채널 검색</string>
-    <!--삭제 Dialog 메뉴-->
-    <string name="Twitch_Reset">트위치 스트리머 리스트 초기화</string>
 
     <!--Dialog-->
     <string name="Logout">로그아웃 하시겠습니까?</string>
