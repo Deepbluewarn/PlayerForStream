@@ -5,19 +5,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.style.ImageSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -26,7 +21,6 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 
-/*import club.rodong.playerforstream.DBHelper;*/
 import club.rodong.playerforstream.R;
 import club.rodong.playerforstream.SharedPreferenceHelper;
 import club.rodong.playerforstream.activity.WebViewActivity;
@@ -41,6 +35,7 @@ public class SettingPreferenceFragment extends PreferenceFragment {
     PreferenceScreen set_theme;
     PreferenceScreen lisence;
     PreferenceScreen iconinfo;
+    PreferenceScreen version_info;
     Boolean isLogIn = false;
 
     //DBHelper DBHelper;
@@ -50,7 +45,7 @@ public class SettingPreferenceFragment extends PreferenceFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings_preference);
-        SPH = new SharedPreferenceHelper(getContext());
+        SPH = new SharedPreferenceHelper(getActivity());
         //DBHelper = new DBHelper(getContext());
 
         tLogin = (PreferenceScreen)findPreference("Twitch_login");
@@ -58,11 +53,18 @@ public class SettingPreferenceFragment extends PreferenceFragment {
         set_theme = (PreferenceScreen)findPreference("Theme_setting");
         lisence = (PreferenceScreen)findPreference("OpenSources");
         iconinfo = (PreferenceScreen)findPreference("icon_info");
+        version_info = (PreferenceScreen)findPreference("version_info");
         //로그인 여부 가져오기
         isLogIn = SPH.getLogin();
-        Log.i("prefs Oncre() T로그인상태초기화",isLogIn.toString());
 
         set_prefText(isLogIn);
+
+        try {
+            PackageInfo pi = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
+            version_info.setSummary(pi.versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
         tLogin.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -70,7 +72,7 @@ public class SettingPreferenceFragment extends PreferenceFragment {
                 isLogIn = SPH.getLogin();
                 if(isLogIn){
                     //todo 로그아웃 Dialog
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle(getResources().getString(R.string.pref_Logout_title));
                     builder.setMessage(getResources().getString(R.string.Logout));
                     builder.setPositiveButton("예",
@@ -99,12 +101,11 @@ public class SettingPreferenceFragment extends PreferenceFragment {
                 final String items[] = { "640 × 360", "960 × 540", "1280 × 720","1600 × 900","1920 x 1080 (느림)" };
                 final int[] selectedIndex = {0};
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                 dialog.setTitle(getString(R.string.change_size))
                         .setSingleChoiceItems(items, SPH.get_t_size_num(), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Log.i("아이템 선택 :",String.valueOf(i));
                                 selectedIndex[0] = i;
                             }
                         })
@@ -147,11 +148,10 @@ public class SettingPreferenceFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Toast.makeText(getActivity().getApplicationContext(), "테마를 변경합니다.", Toast.LENGTH_SHORT).show();
-                //final String items[] = {"Twitch", "Green", "Acua", "Violet Black", "Pastel", "Red & Blue", "White"};
                 final String items[] = {"Blue & Green", "Black & Brown", "Yellow & White"};
                 final int[] selectedIndex = {0};
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                 dialog.setTitle(getString(R.string.change_size))
                         .setSingleChoiceItems(items, SPH.getTheme(), new DialogInterface.OnClickListener() {
                             @Override
@@ -173,11 +173,11 @@ public class SettingPreferenceFragment extends PreferenceFragment {
         lisence.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 View layout = inflater.inflate(R.layout.lisence, null);
                 TextView textView = layout.findViewById(R.id.license_textview);
-                String lisence_str = loadLisenseFromAsset(getContext());
+                String lisence_str = loadLisenseFromAsset(getActivity());
                 textView.setText(lisence_str);
                 dialog.setTitle("LICENSE")
                         .setPositiveButton("Back", new DialogInterface.OnClickListener() {
@@ -203,7 +203,7 @@ public class SettingPreferenceFragment extends PreferenceFragment {
                         "<div>Icons made by <a href=\"http://www.freepik.com\" title=\"Freepik\">Freepik</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> is licensed by <a href=\"http://creativecommons.org/licenses/by/3.0/\" title=\"Creative Commons BY 3.0\" target=\"_blank\">CC 3.0 BY</a></div>";
                 textView.setText(Html.fromHtml(html));
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                 dialog.setTitle("ICON INFO")
                         .setPositiveButton("Back", new DialogInterface.OnClickListener() {
                             @Override

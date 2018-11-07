@@ -167,7 +167,7 @@ public class SharedPreferenceHelper {
         editor.apply();
     }
     public int getTheme(){
-        return prefs.getInt(resources.getString(R.string.theme_num),0);
+        return prefs.getInt(resources.getString(R.string.theme_num),2);
     }
     public void setTheme(int theme_num){
         editor = prefs.edit();

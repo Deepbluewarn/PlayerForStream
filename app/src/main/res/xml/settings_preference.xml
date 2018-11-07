@@ -30,6 +30,13 @@
         </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory
+        android:title="버전 정보">
+        <PreferenceScreen
+            android:key="version_info"
+            android:title="@string/app_name">
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory
         android:title="라이센스">
         <PreferenceScreen
             android:key="OpenSources"
