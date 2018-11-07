@@ -10,14 +10,14 @@ android {
         applicationId "club.rodong.playerforstream"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 8
+        versionCode 9
         /*
         android:versionName = “1.0.0”
         l  첫 번째 번호 : 컨셉이나 앱이 지향하는 기본 디자인이 변경된 경우
         l  두 번째 번호 : 기능 추가나 사양이 변경된 경우
         l  세 번째 번호 : 버그 수정, 디자인 변경
         */
-        versionName "0.1.181106"
+        versionName "0.1.181107"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
