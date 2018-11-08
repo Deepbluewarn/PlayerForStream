@@ -6,11 +6,12 @@ import com.google.gson.annotations.SerializedName;
 public class Twitch_Webhook_Body_Object {
 
     public Twitch_Webhook_Body_Object(
-            String hubCallback, String hubMode, String hubTopic, int hubLeaseSeconds){
+            String hubCallback, String hubMode, String hubTopic, int hubLeaseSeconds, String hubSecret){
         this.hubCallback = hubCallback;
         this.hubMode = hubMode;
         this.hubTopic = hubTopic;
         this.hubLeaseSeconds = hubLeaseSeconds;
+        this.hubSecret = hubSecret;
     }
 
     @SerializedName("hub.callback")
