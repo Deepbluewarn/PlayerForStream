@@ -10,7 +10,6 @@
     <string name="twitch_BaseUrl">https://api.twitch.tv/</string>
     <!--트위치 구독 Badges-->
     <string name="twitch_subscriber_badges">https://badges.twitch.tv</string>
-    <string name="twitch_client_id">5s8icgxpodxmo6oajt6nk20x2q6yrc</string>
     <!--트위치 IRC-->
     <string name="twitch_irc">irc.chat.twitch.tv</string>
 
@@ -32,6 +31,7 @@
     <string name="pref_setting_setlang">언어 설정</string>
     <string name="pref_setting_settheme">테마 설정</string>
     <string name="pref_opensource_disc">오픈소스 라이센스</string>
+    <string name="pref_version_info">버전 정보</string>
     <string name="pref_icon_info">아이콘 정보</string>
 
 
