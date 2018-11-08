@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 
+import club.rodong.playerforstream.BuildConfig;
 import club.rodong.playerforstream.R;
 import club.rodong.playerforstream.RetrofitHelper;
 import club.rodong.playerforstream.SharedPreferenceHelper;
@@ -59,7 +60,7 @@ public class WebViewActivity extends AppCompatActivity {
             finish();
         }else{
             webView.loadUrl("https://id.twitch.tv/oauth2/authorize" +
-                    "?client_id=5s8icgxpodxmo6oajt6nk20x2q6yrc" +
+                    "?client_id=" + BuildConfig.TWITCH_CLIENT_ID +
                     "&redirect_uri=login://simpletwitch.com" +
                     "&response_type=token" +
                     "&scope=user_read+openid+chat:read+channel:moderate+chat:edit+user_subscriptions" +

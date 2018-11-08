@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
+import club.rodong.playerforstream.BuildConfig;
 import club.rodong.playerforstream.POJO.LiveDetail;
 import club.rodong.playerforstream.POJO.Twitch_v5_Get_Stream_By_User;
 import club.rodong.playerforstream.interfaces.ItemClickListener;
@@ -122,7 +123,7 @@ public class RV_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> im
         final int ID = Integer.parseInt(IDtv.getText().toString());//리스트뷰 아이템에 붙여놓은 PDID 값 가져옴.
 
         final Twitch_API twitch_API = RetrofitHelper.getRetrofit_Json(context.getString(R.string.twitch_BaseUrl)).create(Twitch_API.class);
-        Call<Twitch_v5_Get_Stream_By_User> getStreamByUserCall = twitch_API.Twitch_v5_Get_Stream_By_User("application/vnd.twitchtv.v5+json","5s8icgxpodxmo6oajt6nk20x2q6yrc",ID);
+        Call<Twitch_v5_Get_Stream_By_User> getStreamByUserCall = twitch_API.Twitch_v5_Get_Stream_By_User("application/vnd.twitchtv.v5+json",BuildConfig.TWITCH_CLIENT_ID, ID);
         getStreamByUserCall.enqueue(new Callback<Twitch_v5_Get_Stream_By_User>() {
             @Override
             public void onResponse(Call<Twitch_v5_Get_Stream_By_User> call, Response<Twitch_v5_Get_Stream_By_User> response) {

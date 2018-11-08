@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -70,11 +71,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
+import club.rodong.playerforstream.BuildConfig;
 import club.rodong.playerforstream.Fragment.EmoteFragment;
 import club.rodong.playerforstream.GlideApp;
 import club.rodong.playerforstream.JavascriptBridge;
+import club.rodong.playerforstream.POJO.Twitch_New_Get_Games;
 import club.rodong.playerforstream.POJO.Twitch_New_Get_Streams;
 import club.rodong.playerforstream.POJO.Twitch_Webhook_Body_Object;
 import club.rodong.playerforstream.POJO.Twitch_v5_Get_Stream_By_User;
@@ -169,8 +173,6 @@ public class Stream_Player_Activity extends AppCompatActivity {
         Log.i("onCreate", "Stream_Player_Activity: 실행");
         Fabric.with(this, new Crashlytics());
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_player);
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("ACTION_STRING_ACTIVITY"));
 
         new Thread(new Runnable() {
             @Override
@@ -344,9 +346,39 @@ public class Stream_Player_Activity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Bundle bundle = intent.getBundleExtra("msg");
-                Log.i("Stream_Player_Activity", "FCM onReceive: " + bundle.get("msgBody"));
+                Log.i("Stream_Player_Activity", "FCM onReceive: " + bundle.getString("msgBody"));
+                JsonParser parser = new JsonParser();
+                String json = bundle.getString("msgBody");
+                if(json != null){
+                    JsonObject obj = parser.parse(json).getAsJsonObject();
+                    final String title = obj.get("title").getAsString();
+                    int game_id = obj.get("game_id").getAsInt();
+                    final String user_name = obj.get("user_name").getAsString();
+                    final Twitch_API twitchApi = RetrofitHelper.getRetrofit_Json(getString(R.string.twitch_BaseUrl)).create(Twitch_API.class);
+                    Call<Twitch_New_Get_Games> getGamesCall = twitchApi.Get_Games(BuildConfig.TWITCH_CLIENT_ID, game_id);
+                    getGamesCall.enqueue(new Callback<Twitch_New_Get_Games>() {
+                        @Override
+                        public void onResponse(Call<Twitch_New_Get_Games> call, Response<Twitch_New_Get_Games> response) {
+                            Twitch_New_Get_Games games = response.body();
+                            if (games != null) {
+                                stream_category_tv.setText(games.getData().get(0).getName());
+                            }
+                            streamer_name_tv.setText(user_name);
+                            title_tv.setText(title);
+                        }
+
+                        @Override
+                        public void onFailure(Call<Twitch_New_Get_Games> call, Throwable t) {
+
+                        }
+                    });
+
+                    Log.i(TAG, "FCM onReceive: " + obj.get("title"));
+                }
             }
         };
+        registerReceiver(mMessageReceiver, new IntentFilter("ACTION_STRING_ACTIVITY"));
+
 
         myListener = new TwitchListener(messageAdapter, SPH, GlideApp.with(this), this);
 
@@ -430,7 +462,7 @@ public class Stream_Player_Activity extends AppCompatActivity {
         if(ID != 0){
             //final DBHelper db = new DBHelper(this);
             final Twitch_API twitch_API = RetrofitHelper.getRetrofit_Json(getString(R.string.twitch_BaseUrl)).create(Twitch_API.class);
-            Call<Twitch_v5_Get_Stream_By_User> getStreamByUserCall = twitch_API.Twitch_v5_Get_Stream_By_User("application/vnd.twitchtv.v5+json", getResources().getString(R.string.twitch_client_id), ID);
+            Call<Twitch_v5_Get_Stream_By_User> getStreamByUserCall = twitch_API.Twitch_v5_Get_Stream_By_User("application/vnd.twitchtv.v5+json", BuildConfig.TWITCH_CLIENT_ID, ID);
             getStreamByUserCall.enqueue(new Callback<Twitch_v5_Get_Stream_By_User>() {
                 @Override
                 public void onResponse(Call<Twitch_v5_Get_Stream_By_User> call, Response<Twitch_v5_Get_Stream_By_User> response) {
@@ -474,7 +506,7 @@ public class Stream_Player_Activity extends AppCompatActivity {
 
             Twitch_API twitch_api = RetrofitHelper.getRetrofit_String(getString(R.string.twitch_BaseUrl)).create(Twitch_API.class);
             Call<String> user_emotes = twitch_api.Twitch_v5_Get_User_Emotes("application/vnd.twitchtv.v5+json",
-                    "5s8icgxpodxmo6oajt6nk20x2q6yrc","OAuth " + SPH.get_access_token(), SPH.getTwitchid());
+                    BuildConfig.TWITCH_CLIENT_ID,"OAuth " + SPH.get_access_token(), SPH.getTwitchid());
             user_emotes.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
@@ -518,37 +550,23 @@ public class Stream_Player_Activity extends AppCompatActivity {
                 }
             });
 
+            String twitchWebhookSecret = BuildConfig.TWITCH_WEBHOOK_SECRET;
             //Twitch Webhook Subscribe POST Request..
             Twitch_Webhook_Body_Object object = new Twitch_Webhook_Body_Object("https://us-central1-twitchwebhook.cloudfunctions.net/SimpleTwitchEndPoint",
-                    "subscribe","https://api.twitch.tv/helix/streams?user_id=" + ID,864000);
+                    "subscribe","https://api.twitch.tv/helix/streams?user_id=" + 147773734,86400, twitchWebhookSecret);//만료기간 하루.
 
-            Call<String> webhook_subscribe = twitch_API.Request_Subscribe("application/json","5s8icgxpodxmo6oajt6nk20x2q6yrc", object);
+            Call<String> webhook_subscribe = twitch_API.Request_Subscribe("application/json", BuildConfig.TWITCH_CLIENT_ID, object);
             webhook_subscribe.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {}
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {}
             });
-
-            //Firebase 구독은 한 Topic 에만..
-            //Firebase 구독 전체 해제.
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        FirebaseInstanceId.getInstance().deleteInstanceId();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            //Firebase 구독.
             FirebaseMessaging.getInstance().subscribeToTopic(String.valueOf(ID)).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    //Toast.makeText(getApplicationContext(), "Firebase Topic : " + ID, Toast.LENGTH_SHORT).show();
-                }
+                    Log.i(TAG, "onSuccess: Firebase 구독 : " + String.valueOf(ID));
+            }
             });
         }
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( Stream_Player_Activity.this,  new OnSuccessListener<InstanceIdResult>() {
@@ -912,14 +930,17 @@ public class Stream_Player_Activity extends AppCompatActivity {
         if(!isconnected){
             connectIRC();
         }
+        /*registerReceiver(mMessageReceiver, new IntentFilter("ACTION_STRING_ACTIVITY"));*/
         final Twitch_API twitch_API = RetrofitHelper.getRetrofit_Json(getString(R.string.twitch_BaseUrl)).create(Twitch_API.class);
-        Call<Twitch_New_Get_Streams> newGetStreamsCall = twitch_API.Get_Stream("5s8icgxpodxmo6oajt6nk20x2q6yrc",ID,1);
+        Call<Twitch_New_Get_Streams> newGetStreamsCall = twitch_API.Get_Stream(BuildConfig.TWITCH_CLIENT_ID, ID,1);
         newGetStreamsCall.enqueue(new Callback<Twitch_New_Get_Streams>() {
             @Override
             public void onResponse(Call<Twitch_New_Get_Streams> call, Response<Twitch_New_Get_Streams> response) {
                 Twitch_New_Get_Streams twitch = response.body();
-                if(twitch != null && twitch.getData().size() == 0){
-                    Toast.makeText(getApplicationContext(), "방송이 오프라인 상태입니다.", Toast.LENGTH_SHORT).show();
+                if(twitch != null){
+                    if(twitch.getData().size() == 0){
+                        Toast.makeText(getApplicationContext(), "방송이 오프라인 상태입니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -947,7 +968,12 @@ public class Stream_Player_Activity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+        unregisterReceiver(mMessageReceiver);
+        try {
+            FirebaseInstanceId.getInstance().deleteInstanceId();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -958,11 +984,6 @@ public class Stream_Player_Activity extends AppCompatActivity {
             public void run() {
                 for(PircBotX botX : manager.getBots().asList()){
                     botX.close();
-                }
-                try {
-                    FirebaseInstanceId.getInstance().deleteInstanceId();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         });

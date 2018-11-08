@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import club.rodong.playerforstream.BuildConfig;
 import club.rodong.playerforstream.GlideApp;
 import club.rodong.playerforstream.POJO.LiveDetail;
 import club.rodong.playerforstream.POJO.Twitch_v5_Get_Followed_Stream;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private RV_Adapter rvadapter;
     LinearLayoutManager mLayoutManager;
     ActivityMainBinding mBinding;
-    private long pressedTime;//뒤로 가기 한번더 기능
+    private long pressedTime;
     SharedPreferenceHelper SPH;
 
     SwipeRefreshLayout swipeRefreshLayout;
@@ -69,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         Log.i("onCreate", "진입");
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        //setting = mBinding.btnSetting;
         swipeRefreshLayout = mBinding.refresh;
         toolbar = mBinding.toolbar;
 
@@ -132,10 +132,10 @@ public class MainActivity extends AppCompatActivity {
             View layout = inflater.inflate(R.layout.first_demo, null);
             TextView textView = layout.findViewById(R.id.firstdemo_textview);
             String demostr =
-                    "앱을 다운로드 해주셔서 감사합니다. \n\n" +
-                    "방송 미리보기를 한번 터치하면 새로고침 할 수 있습니다. \n\n" +
-                    "방송 미리보기를 길게 터치하면 라이브 스트리밍을 시청할 수 있습니다.\n\n" +
-                    "미완성 앱이므로 만약 앱 이용 중 오류 발생이나 기타 개선사항 등이 있으시면 앱 리뷰나 이메일을 통해 피드백 부탁드립니다.";
+                    "  앱을 다운로드 해주셔서 감사합니다. \n\n" +
+                    "  방송 미리보기를 한번 터치하면 새로고침 할 수 있습니다. \n\n" +
+                    "  방송 미리보기를 길게 터치하면 라이브 스트리밍을 시청할 수 있습니다.\n\n" +
+                    "  미완성 앱이므로 만약 앱 이용 중 오류 발생이나 기타 개선사항 등이 있으시면 앱 리뷰나 이메일을 통해 피드백 부탁드립니다.";
             textView.setText(demostr);
             AlertDialog.Builder dialog = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
             dialog.setTitle("Simple Player For Twitch")
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
             final Twitch_API twitch_api = RetrofitHelper.getRetrofit_Json(getString(R.string.twitch_BaseUrl)).create(Twitch_API.class);
             Call<Twitch_v5_Get_Followed_Stream> users_followsCall = twitch_api.Get_Followed_Streams(
                     "application/vnd.twitchtv.v5+json",
-                    "5s8icgxpodxmo6oajt6nk20x2q6yrc",
+                    BuildConfig.TWITCH_CLIENT_ID,
                     "OAuth " + SPH.get_access_token(),100);
             users_followsCall.enqueue(new Callback<Twitch_v5_Get_Followed_Stream>() {
                 @Override
