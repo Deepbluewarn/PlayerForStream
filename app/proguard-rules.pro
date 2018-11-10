@@ -170,7 +170,6 @@ public ** join(...);
 -dontwarn javax.lang.model.element.Modifier
 #end Guava
 
-#Start UserHabit
 -dontwarn android.support.**
 -dontwarn org.apache.http.**
 -dontwarn android.webkit.WebViewClient
@@ -180,6 +179,3 @@ public ** join(...);
 -keepnames interface android.support.v7.** { *; }
 -keep class org.apache.** { *; }
 -keep interface org.apache.http.** { *; }
-#End UserHabit
-
--keepclassmembers class name.cpr.VideoEnabledWebView$JavascriptInterface { public *; }

@@ -553,7 +553,7 @@ public class Stream_Player_Activity extends AppCompatActivity {
             String twitchWebhookSecret = BuildConfig.TWITCH_WEBHOOK_SECRET;
             //Twitch Webhook Subscribe POST Request..
             Twitch_Webhook_Body_Object object = new Twitch_Webhook_Body_Object("https://us-central1-twitchwebhook.cloudfunctions.net/SimpleTwitchEndPoint",
-                    "subscribe","https://api.twitch.tv/helix/streams?user_id=" + 147773734,86400, twitchWebhookSecret);//만료기간 하루.
+                    "subscribe","https://api.twitch.tv/helix/streams?user_id=" + ID,86400, twitchWebhookSecret);//만료기간 하루.
 
             Call<String> webhook_subscribe = twitch_API.Request_Subscribe("application/json", BuildConfig.TWITCH_CLIENT_ID, object);
             webhook_subscribe.enqueue(new Callback<String>() {
@@ -969,11 +969,17 @@ public class Stream_Player_Activity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mMessageReceiver);
-        try {
-            FirebaseInstanceId.getInstance().deleteInstanceId();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    FirebaseInstanceId.getInstance().deleteInstanceId();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     @Override

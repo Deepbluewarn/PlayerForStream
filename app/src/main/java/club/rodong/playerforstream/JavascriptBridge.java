@@ -92,6 +92,5 @@ public class JavascriptBridge {
                 setting_btn.setVisibility(View.VISIBLE);
             }
         });
-
     }
 }
