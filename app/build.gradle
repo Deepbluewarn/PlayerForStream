@@ -18,8 +18,8 @@ android {
         applicationId "club.rodong.playerforstream"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 11
-        versionName "0.1.181109"
+        versionCode 12
+        versionName "0.1.181110"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
