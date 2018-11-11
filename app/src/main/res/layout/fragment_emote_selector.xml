@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <club.rodong.playerforstream.AutofitRecyclerView
+    <club.rodong.slitch.AutofitRecyclerView
         android:id="@+id/emote_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"

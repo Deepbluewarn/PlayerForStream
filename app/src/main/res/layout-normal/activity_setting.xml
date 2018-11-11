@@ -6,12 +6,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="club.rodong.playerforstream.activity.MainActivity">
+    tools:context="club.rodong.slitch.activity.MainActivity">
 
     <fragment
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/settings_fragment"
-        android:name="club.rodong.playerforstream.Fragment.SettingPreferenceFragment"
+        android:name="club.rodong.slitch.Fragment.SettingPreferenceFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
